@@ -1,1 +1,7 @@
-Planned Stack: Python, HTML/CSS, Flask 
+.env
+.venv/
+node_modules/
+__pycache__/
+*.sqlite3
+*.db
+.DS_Store
