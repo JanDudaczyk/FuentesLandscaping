@@ -13,3 +13,10 @@ Did: created the repo, gitignore, README, invited the teacher.
 Learned: (whatever you learned — or "nothing new today," which is fine)
 Next: hello world running in my stack
 Blocked: nothing
+
+## 2026-11-12 · Thurs
+State: repo exists base plate made
+Did: created the base plate 
+Learned: nothing new today
+Next: Making links - connecting the sites
+Blocked: nothing
