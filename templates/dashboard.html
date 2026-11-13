@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fuentes Landscaping Dashboard</title>
+</head>
+
+<body>
+
+    <h1>Fuentes Landscaping</h1>
+
+    <!-- Login -->
+    <div>
+        <h3>Admin Login</h3>
+        <form>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button type="button">Login</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- Dashboard Overview -->
+    <h2>Dashboard</h2>
+
+    <p>Total Clients: {{ clients|length }}</p>
+    <p>Active Clients: {{ active_clients }}</p>
+
+    <hr>
+
+    <!-- Client Directory -->
+    <h2>Client Directory</h2>
+
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Service</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for client in clients %}
+
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.phone or "N/A" }}</td>
+                <td>{{ client.email or "N/A" }}</td>
+                <td>{{ client.address or "N/A" }}</td>
+                <td>{{ client.service or "N/A" }}</td>
+                <td>{{ client.status }}</td>
+            </tr>
+
+            {% else %}
+
+            <tr>
+                <td colspan="7">No clients found.</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <hr>
+
+    <!-- Add Client -->
+    <h2>Add New Client</h2>
+
+    <form action="{{ url_for('add_client') }}" method="POST">
+
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br><br>
+
+        <label>Phone:</label>
+        <input type="text" name="phone">
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email">
+        <br><br>
+
+        <label>Address:</label>
+        <input type="text" name="address">
+        <br><br>
+
+        <label>Service:</label>
+        <select name="service" required>
+            <option value="">Select Service</option>
+            <option value="Lawn Care">Lawn Care</option>
+            <option value="Landscaping">Landscaping</option>
+            <option value="Snow Removal">Snow Removal</option>
+            <option value="Other">Other</option>
+        </select>
+        <br><br>
+
+        <label>Status:</label>
+        <select name="status">
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+        <br><br>
+
+        <button type="submit">Add Client</button>
+
+    </form>
+
+    <hr>
+
+    <!-- Upcoming Jobs -->
+    <h2>Upcoming Jobs</h2>
+
+    <p>Job scheduling coming soon.</p>
+
+</body>
+</html>
