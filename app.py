@@ -1,7 +1,5 @@
-
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask import Flask, render_template, request, redirect, url_for
+from extensions import db, migrate
 
 app = Flask(__name__)
 
@@ -9,13 +7,11 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///landscaping.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# Initialize database
-db = SQLAlchemy(app)
+# Initialize extensions
+db.init_app(app)
+migrate.init_app(app, db)
 
-# Initialize migrations
-migrate = Migrate(app, db)
-
-# Import models
+# Import models after db is initialized
 from models import Client
 
 
@@ -26,22 +22,25 @@ def home():
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-    return render_template('dashboard.html')
+    clients = Client.query.all()
+    active_clients = Client.query.filter_by(status="Active").count()
+    return render_template('dashboard.html', clients=clients, active_clients=active_clients)
 
 
-@app.route('/test-db')
-def test_db():
-    new_client = Client(
-        name="John Smith",
-        phone="1234567890",
-        address="123 Main Street",
-        service="Lawn Mowing"
+@app.route('/add-client', methods=['POST'])
+def add_client():
+    client = Client(
+        name=request.form['name'],
+        phone=request.form.get('phone'),
+        email=request.form.get('email'),
+        address=request.form.get('address'),
+        service=request.form.get('service'),
+        status=request.form.get('status', 'Active'),
     )
-
-    db.session.add(new_client)
+    db.session.add(client)
     db.session.commit()
+    return redirect(url_for('dashboard'))
 
-    return "Client successfully added!"
 
 if __name__ == "__main__":
     app.run(debug=True)

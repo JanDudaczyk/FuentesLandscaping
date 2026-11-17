@@ -1,6 +1,6 @@
 ## 2026-11-16 · Mon
-State: 
-Did: 
-Learned: 
-Next: 
-Blocked: 
+State: Live page is running
+Did: Added Axel to the repo, added a framework with the DB
+Learned: How to hook up a DB
+Next: Make our DBs functional
+Blocked: Nothing
