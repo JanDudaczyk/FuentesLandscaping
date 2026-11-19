@@ -10,3 +10,9 @@ Did: Made a preliminary dashboard, fixed model issue by adding extensions.py
 Learned: About what extensions.py
 Next: Make a landing page
 Blocked: Nothing 
+## 2026-11-17 . Tue
+State: You can login to the admin account to see the dashboard. DB does work for sure with admin account too. 
+Did: Made the login systmm and hooked up the admin account. Made a landing page w/ axel. 
+Learned: To add an admin account to db 
+Next: Make it so a customer can make an acoount
+Blocked: Nothing 

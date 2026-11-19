@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login - Fuentes Landscaping{% endblock %}
+
+{% block head %}
+<style>
+    .login-box {
+        max-width: 380px;
+        margin: 2rem auto;
+    }
+    .login-form {
+        display: grid;
+        gap: 0.5rem;
+    }
+    .login-form label {
+        font-weight: 600;
+    }
+    .error {
+        color: #b00020;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <section class="login-box" aria-labelledby="login-heading">
+        <h2 id="login-heading">Admin Login</h2>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('login') }}" class="login-form">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required autofocus>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Log In</button>
+        </form>
+    </section>
+{% endblock %}
