@@ -81,6 +81,33 @@ def add_client():
     return redirect(url_for('dashboard'))
 
 
+@app.route('/edit-client/<int:client_id>', methods=['GET', 'POST'])
+@login_required
+def edit_client(client_id):
+    client = db.get_or_404(Client, client_id)
+
+    if request.method == 'POST':
+        client.name = request.form['name']
+        client.phone = request.form.get('phone')
+        client.email = request.form.get('email')
+        client.address = request.form.get('address')
+        client.service = request.form.get('service')
+        client.status = request.form.get('status', 'Active')
+        db.session.commit()
+        return redirect(url_for('dashboard'))
+
+    return render_template('edit_client.html', client=client)
+
+
+@app.route('/delete-client/<int:client_id>', methods=['POST'])
+@login_required
+def delete_client(client_id):
+    client = db.get_or_404(Client, client_id)
+    db.session.delete(client)
+    db.session.commit()
+    return redirect(url_for('dashboard'))
+
+
 # Command: flask create-admin
 @app.cli.command("create-admin")
 def create_admin():

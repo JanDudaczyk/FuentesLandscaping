@@ -16,3 +16,9 @@ Did: Made the login systmm and hooked up the admin account. Made a landing page 
 Learned: To add an admin account to db 
 Next: Make it so a customer can make an acoount
 Blocked: Nothing 
+## 2026-11-20 . Fri
+State: Admin can add, edit, and delete clients to the db  
+Did: Added routes for deleting and editing client files, added warnings before deleting for clarity
+Learned: How to add the warning before the admin deletes db 
+Next: Make the front page nicer
+Blocked: Nothing 
